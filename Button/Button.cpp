@@ -4,7 +4,7 @@
 bool Button::begin(unsigned short pin, unsigned long int refTime)
 {
 
-  pinMode(pin, INPUT);
+  pinMode(pin, INPUT_PULLUP);
 
   this->pin = pin;
 
@@ -16,14 +16,14 @@ bool Button::begin(unsigned short pin, unsigned long int refTime)
 ButtonState Button::getState()
 { 
 
-    // Reading the current pin state (pressed=1 or released=0)
+    // Reading the current pin state (pressed=ON or released=OFF)
     cstate = digitalRead(pin);
 
     // If button is currently realeased
-    if ( cstate == 0 ) {
+    if ( cstate == OFF ) {
 
         // If button was released before
-        if ( pstate == 0 ) {
+        if ( pstate == OFF ) {
 
             pstate = cstate;
 
@@ -54,7 +54,7 @@ ButtonState Button::getState()
     else
     {
         // If button was released before
-        if ( pstate == 0 ) {
+        if ( pstate == OFF ) {
 
             pstate = cstate;
 

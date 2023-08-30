@@ -24,24 +24,28 @@ class Button
 
     public:
         // Initializes
-        bool begin(unsigned short pin, unsigned long int refTime = 1500);
+        bool begin(unsigned short pin, unsigned long int refTime = 3000);
 
         // Returns the button state
         ButtonState getState();
 
     private:
 
+        // Defines on and off
+        uint8_t  ON  {LOW}; // pressed
+        uint8_t OFF {HIGH}; // released
+
         // Arduino pin associated to the button
         unsigned short pin;
 
         // Reference time to long pressed button state (milliseconds)
-        unsigned long int refTime {1500};
+        unsigned long int refTime {3000};
 
-        // Previous button state (pressed=1 or released=0)
-        unsigned short pstate{0};
+        // Previous button state (pressed=ON or released=OFF)
+        unsigned short pstate{OFF};
         
-        // Current button state (pressed=1 or released=0)
-        unsigned short cstate{0};
+        // Current button state (pressed=ON or released=OFF)
+        unsigned short cstate{OFF};
 
         // Stores the time when button was first pressed after a release
         unsigned long int T0;
